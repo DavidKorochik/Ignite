@@ -4,16 +4,8 @@ export const gamesReducer = (
 ) => {
   switch (action.type) {
     case 'FETCH_GAMES':
-      return { ...state };
+      return { ...state, ...action.payload };
     default:
       return { ...state };
   }
-};
-
-// Action Creator
-const fetchGames = (userData) => {
-  return {
-    type: 'FETCH_GAMES',
-    payload: userData,
-  };
 };
