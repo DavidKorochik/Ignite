@@ -11,11 +11,12 @@ import nintendo from '../img/nintendo.svg';
 import apple from '../img/apple.svg';
 import gamepad from '../img/gamepad.svg';
 import ReactStars from 'react-stars';
-import { render } from 'react-dom';
 
 const GameDetail = ({ pathId }) => {
   const { game, screen, isLoading } = useSelector((state) => state.detail);
   const history = useHistory();
+
+  console.log(game);
 
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -76,6 +77,11 @@ const GameDetail = ({ pathId }) => {
               </Info>
             </Stats>
             <Media>
+              {game.clip && (
+                <video controls loop>
+                  <source src={game.clip.clips.full}></source>
+                </video>
+              )}
               <motion.img
                 layoutId={`image ${pathId}`}
                 src={smallImage(game.background_image, 1280)}
@@ -157,6 +163,11 @@ const Media = styled(motion.div)`
   margin-top: 5rem;
   img {
     width: 100%;
+  }
+  video {
+    width: 100%;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.6);
+    margin-bottom: 3rem;
   }
 `;
 

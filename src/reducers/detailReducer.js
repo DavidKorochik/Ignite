@@ -1,5 +1,9 @@
 export const detailReducer = (
-  state = { game: { platforms: [] }, screen: { results: [] }, isLoading: true },
+  state = {
+    game: { platforms: [] },
+    screen: { results: [] },
+    isLoading: true,
+  },
   action
 ) => {
   switch (action.type) {
