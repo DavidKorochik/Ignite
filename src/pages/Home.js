@@ -19,7 +19,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(loadGames());
+    dispatch(loadGames(9));
   }, [dispatch]);
 
   return (

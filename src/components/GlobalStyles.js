@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
     }
+    
     html {
         &::-webkit-scrollbar {
             width: 0.5rem;
@@ -25,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 3rem;
         font-family: 'Abril Fatface', cursive;
         font-weight: lighter;
-        color: #333;
+        color: gray;
     }
     h3 {
         font-size: 1.3rem;

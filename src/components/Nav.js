@@ -5,6 +5,8 @@ import logo from '../img/logo.svg';
 import { useDispatch } from 'react-redux';
 import { fetchSearch } from '../actions/gamesAction';
 import { fadeIn } from '../animations';
+import { loadGames } from '../actions/gamesAction';
+import gaming from '../img/gaming.jpg';
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -26,17 +28,26 @@ const Nav = () => {
     });
   };
 
+  const filterHandler = (pageSize) => {
+    dispatch(loadGames(pageSize));
+  };
+
   return (
     <StyledNav variants={fadeIn} initial='hidden' animate='show'>
+      <img className='gaming' src={gaming} alt='gaming' />
       <Logo>
         <img onClick={clearSearch} src={logo} alt='logo' />
       </Logo>
-      <div>
-        <input value={textInput} onChange={handleChange} type='text' />
-        <button onClick={handleSubmit} type='submit'>
-          Search
-        </button>
-      </div>
+      <input value={textInput} onChange={handleChange} type='text' />
+      <button onClick={handleSubmit} type='submit'>
+        Search
+      </button>
+      <ListButtons>
+        <button onClick={() => filterHandler(5)}>5</button>
+        <button onClick={() => filterHandler(10)}>10</button>
+        <button onClick={() => filterHandler(15)}>15</button>
+        <button onClick={() => clearSearch()}>Clear Search</button>
+      </ListButtons>
     </StyledNav>
   );
 };
@@ -61,6 +72,15 @@ const StyledNav = styled(motion.nav)`
     color: white;
     outline: none;
   }
+  img {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
 `;
 
 const Logo = styled(motion.div)`
@@ -68,8 +88,22 @@ const Logo = styled(motion.div)`
   justify-content: center;
   cursor: pointer;
   img {
-    height: 2rem;
-    width: 2rem;
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+  }
+`;
+
+const ListButtons = styled(motion.div)`
+  margin-top: 2rem;
+  button {
+    margin-right: 1rem;
+    border-radius: 50px;
+    &:hover {
+      transition: all 0.5s ease;
+      background-color: transparent;
+      color: white;
+    }
   }
 `;
 

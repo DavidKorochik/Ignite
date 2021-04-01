@@ -30,14 +30,17 @@ const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
 const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 
 // Popular Games
-const popular_games = `games?dates=${lastYear},${currentDate}&ordering=-rating&page_size=12`;
-const upcoming_games = `games?dates=${currentDate},${nextYear}&oredering=-added&page_size=12`;
-const new_games = `games?dates=${lastYear},${currentDate}&oredering=-released&page_size=12`;
+const popular_games = `games?dates=${lastYear},${currentDate}&ordering=-rating`;
+const upcoming_games = `games?dates=${currentDate},${nextYear}&oredering=-added`;
+const new_games = `games?dates=${lastYear},${currentDate}&oredering=-released`;
 
 // Exporting all the games URL
-export const popularGamesURL = () => `${base_url}/${popular_games}`;
-export const upcomingGamesURL = () => `${base_url}/${upcoming_games}`;
-export const newGamesURL = () => `${base_url}/${new_games}`;
+export const popularGamesURL = (pageSize) =>
+  `${base_url}/${popular_games}&page_size=${pageSize}`;
+export const upcomingGamesURL = (pageSize) =>
+  `${base_url}/${upcoming_games}&page_size=${pageSize}`;
+export const newGamesURL = (pageSize) =>
+  `${base_url}/${new_games}&page_size=${pageSize}`;
 
 // Game Details https://api.rawg.io/api/games/{id}
 export const gameDetailsURL = (id) => `${base_url}/games/${id}`;

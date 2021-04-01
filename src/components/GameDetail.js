@@ -47,6 +47,11 @@ const GameDetail = ({ pathId }) => {
     console.log(newRating);
   };
 
+  const ignoreNoWebsites = (e) => {
+    if (e.target.matches('.click')) return;
+    e.preventDefault();
+  };
+
   return (
     <>
       {!isLoading && (
@@ -54,7 +59,15 @@ const GameDetail = ({ pathId }) => {
           <Detail>
             <Stats>
               <div className='rating'>
-                <h3>{game.name}</h3>
+                <h3>
+                  <a
+                    className='click'
+                    target='_blank'
+                    href={game.website ? game.website : ignoreNoWebsites}
+                  >
+                    {game.name}
+                  </a>
+                </h3>
                 <p>Rating: {game.rating}</p>
                 <ReactStars
                   count={5}
@@ -77,16 +90,16 @@ const GameDetail = ({ pathId }) => {
               </Info>
             </Stats>
             <Media>
-              {game.clip && (
-                <video controls loop>
-                  <source src={game.clip.clips.full}></source>
-                </video>
-              )}
               <motion.img
                 layoutId={`image ${pathId}`}
                 src={smallImage(game.background_image, 1280)}
                 alt='image'
               />
+              {game.clip && (
+                <video controls loop>
+                  <source src={game.clip.clips.full}></source>
+                </video>
+              )}
             </Media>
             <Description>
               <p>{game.description_raw}</p>
@@ -167,7 +180,7 @@ const Media = styled(motion.div)`
   video {
     width: 100%;
     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.6);
-    margin-bottom: 3rem;
+    margin-top: 3rem;
   }
 `;
 
